@@ -37,4 +37,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    //OpneCV图像处理库
+    implementation libs.opencv.android
 }
