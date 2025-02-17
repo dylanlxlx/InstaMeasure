@@ -39,5 +39,5 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     //OpneCV图像处理库
-    implementation libs.opencv.android
+//    implementation libs.opencv.android
 }
