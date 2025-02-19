@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.dylanlxlx.instameasure.R;
@@ -28,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private SensorService sensorService;
 
     private TrajectoryView trajectoryView;
-    private LiveData<List<TrajectoryPoint>> trajectoryLiveData;
-    List<TrajectoryPoint> testData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        trajectoryLiveData = sensorService.getTrajectoryLiveData();
-        trajectoryLiveData.observe(this, new Observer<List<TrajectoryPoint>>() {
+        sensorService.getTrajectoryLiveData().observe(this, new Observer<List<TrajectoryPoint>>() {
             @Override
             public void onChanged(List<TrajectoryPoint> trajectory) {
                 trajectoryView.setTrajectory(trajectory);
