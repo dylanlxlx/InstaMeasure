@@ -14,7 +14,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.dylanlxlx.instameasure.R;
 import com.dylanlxlx.instameasure.model.TrajectoryPoint;
@@ -46,13 +45,6 @@ public class MainActivity extends AppCompatActivity {
         bindService(new Intent(this, SensorService.class), serviceConnection, BIND_AUTO_CREATE);
 
         requestPermissions();
-
-        testData.add(new TrajectoryPoint(0, 0));
-        testData.add(new TrajectoryPoint(2, 0));
-        testData.add(new TrajectoryPoint(2, 3));
-        testData.add(new TrajectoryPoint(0, 3));
-        testData.add(new TrajectoryPoint(0, 0));
-        trajectoryView.setTrajectory(testData);
     }
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
