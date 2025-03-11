@@ -3,6 +3,7 @@ pluginManagement {
         maven{ url 'https://maven.aliyun.com/repository/public'}
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://jitpack.io' }
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -21,6 +22,7 @@ dependencyResolutionManagement {
         maven{ url 'https://maven.aliyun.com/repository/public'}
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://jitpack.io' }
         google()
         mavenLocal()
         mavenCentral()

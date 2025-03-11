@@ -29,4 +29,46 @@ public class MathUtils {
         }
         return Math.abs(area) / 2.0;
     }
+
+    // 计算三维加速度向量模长
+    public static float calculateMagnitude(float[] accelerometer) {
+        return (float) Math.sqrt(
+                accelerometer[0] * accelerometer[0] +
+                        accelerometer[1] * accelerometer[1] +
+                        accelerometer[2] * accelerometer[2]
+        );
+    }
+
+    public static float calculateStandardDeviation(List<Float> accelList) {
+        float mean = 0;
+        for (float accel : accelList) {
+            mean += accel;
+        }
+        mean /= accelList.size();
+
+        float sumSquaredDiffs = 0;
+        for (float accel : accelList) {
+            sumSquaredDiffs += (accel - mean) * (accel - mean);
+        }
+
+        return (float) Math.sqrt(sumSquaredDiffs / accelList.size());
+    }
+
+    // 计算自相关系数
+    public static float calculateAutoCorrelation(List<Float> accelList) {
+        float mean = 0;
+        for (float accel : accelList) {
+            mean += accel;
+        }
+        mean /= accelList.size();
+
+        float numerator = 0;
+        float denominator = 0;
+        for (int i = 0; i < accelList.size() - 1; i++) {
+            numerator += (accelList.get(i) - mean) * (accelList.get(i + 1) - mean);
+            denominator += (accelList.get(i) - mean) * (accelList.get(i) - mean);
+        }
+
+        return numerator / denominator;
+    }
 }

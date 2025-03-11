@@ -12,7 +12,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.dylanlxlx.instameasure.model.TrajectoryPoint;
+
+import java.util.ArrayList;
 import java.util.List;
+
 // 轨迹绘制
 public class TrajectoryView extends View {
     private List<TrajectoryPoint> trajectory;
@@ -22,7 +25,7 @@ public class TrajectoryView extends View {
     private float offsetX = 0f;        // X轴偏移
     private float offsetY = 0f;        // Y轴偏移
     private long lastDrawTime = 0;
-    private static final long MIN_REDRAW_INTERVAL = 200; // 最小重绘间隔200ms
+    private static final long MIN_REDRAW_INTERVAL = 500; // 最小重绘间隔200ms
 
     public TrajectoryView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,6 +43,11 @@ public class TrajectoryView extends View {
     // 外部传入轨迹数据
     public void setTrajectory(List<TrajectoryPoint> trajectory) {
         Log.d("TrajectoryView", "Received points: " + (trajectory != null ? trajectory.size() : 0));
+        if (trajectory == null || trajectory.isEmpty()) {
+            this.trajectory = new ArrayList<>();
+            invalidate();
+            return;
+        }
         this.trajectory = trajectory;
 //        calculateScaling(); // 计算缩放和偏移
 //        invalidate();        // 触发重绘
@@ -74,8 +82,8 @@ public class TrajectoryView extends View {
         scaleFactor = Math.min(scaleX, scaleY);
 
         // 计算偏移量（居中显示）
-        offsetX = (float) (-minX * scaleFactor) + (getWidth() - (float)(maxX - minX) * scaleFactor)/2;
-        offsetY = (float) (-minY * scaleFactor) + (getHeight() - (float)(maxY - minY) * scaleFactor)/2;
+        offsetX = (float) (-minX * scaleFactor) + (getWidth() - (float) (maxX - minX) * scaleFactor) / 2;
+        offsetY = (float) (-minY * scaleFactor) + (getHeight() - (float) (maxY - minY) * scaleFactor) / 2;
     }
 
     @Override

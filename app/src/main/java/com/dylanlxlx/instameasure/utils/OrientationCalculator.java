@@ -3,7 +3,7 @@ package com.dylanlxlx.instameasure.utils;
 
 import android.hardware.SensorManager;
 
-public class DirectionCalculator {
+public class OrientationCalculator {
     private float[] rotationMatrix = new float[9];
     private float[] orientation = new float[3];
 
@@ -11,7 +11,8 @@ public class DirectionCalculator {
     public float calculateAzimuth(float[] accelerometer, float[] magnetometer) {
         if (SensorManager.getRotationMatrix(rotationMatrix, null, accelerometer, magnetometer)) {
             SensorManager.getOrientation(rotationMatrix, orientation);
-            return (float) Math.toDegrees(orientation[0]);
+            int degree = (int) Math.toDegrees(orientation[0]);//旋转角度
+            return degree < 0 ? degree + 360f : degree;
         }
         return 0f;
     }

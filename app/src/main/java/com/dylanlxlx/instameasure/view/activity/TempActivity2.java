@@ -15,32 +15,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.dylanlxlx.instameasure.R;
-import com.dylanlxlx.instameasure.model.TrajectoryPoint;
 import com.dylanlxlx.instameasure.service.SensorService;
-import com.dylanlxlx.instameasure.view.component.TrajectoryView;
+import com.dylanlxlx.instameasure.view.component.StepView2;
 
-import java.util.ArrayList;
-import java.util.List;
+public class TempActivity2 extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-    private TextView tvDistance, tvArea;
+    private TextView mStepText;
+    private TextView mOrientText;
+    private StepView2 mStepView;
     private SensorService sensorService;
 
-    private TrajectoryView trajectoryView;
+    private int mStepLen = 50; // 步长
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        tvDistance = findViewById(R.id.tv_distance);
-        tvArea = findViewById(R.id.tv_area);
-        trajectoryView = findViewById(R.id.trajectory_view);
-
-        // 启动传感器服务
+        setContentView(R.layout.activity_temp2);
+        mStepText = findViewById(R.id.step_text);
+        mOrientText = findViewById(R.id.orient_text);
+        mStepView = findViewById(R.id.step_surfaceView);
         startService(new Intent(this, SensorService.class));
         bindService(new Intent(this, SensorService.class), serviceConnection, BIND_AUTO_CREATE);
-
         requestPermissions();
     }
 
@@ -59,24 +55,19 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void observeSensorData() {
-        sensorService.getCurrentDistance().observe(this, new Observer<Double>() {
+        sensorService.getStepCountLiveData().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(Double distance) {
-                tvDistance.setText(String.format("距离: %.2f 米", distance));
+            public void onChanged(Integer integer) {
+                mStepText.setText("步数:" + integer);
+                mStepView.autoAddPoint(mStepLen);
             }
         });
 
-        sensorService.getCurrentArea().observe(this, new Observer<Double>() {
+        sensorService.getOrientationLiveData().observe(this, new Observer<Float>() {
             @Override
-            public void onChanged(Double area) {
-                tvArea.setText(String.format("面积: %.2f 平方米", area));
-            }
-        });
-
-        sensorService.getTrajectoryLiveData().observe(this, new Observer<List<TrajectoryPoint>>() {
-            @Override
-            public void onChanged(List<TrajectoryPoint> trajectory) {
-                trajectoryView.setTrajectory(trajectory);
+            public void onChanged(Float aFloat) {
+                mOrientText.setText("方向:" + aFloat);
+                mStepView.autoDrawArrow(aFloat);
             }
         });
     }
