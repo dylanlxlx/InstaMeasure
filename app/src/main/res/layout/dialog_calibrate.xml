@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请选择需要校准的传感器："
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/radio_step_length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="步长校准"
+            android:checked="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="通过已知距离校准步长测量精度"
+            android:textSize="12sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#666666" />
+
+        <RadioButton
+            android:id="@+id/radio_direction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="方向校准" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="校准地磁传感器，提高方向精度"
+            android:textSize="12sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#666666" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_start_calibration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始校准" />
+</LinearLayout>

@@ -72,7 +72,33 @@
 
             </LinearLayout>
 
-            <!-- 新增GPS状态信息行 -->
+            <!-- 新增步长行 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_step_length"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:text="步长: 0.70米"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_location_accuracy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:text="精度: 0.00米"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <!-- GPS状态信息行 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,12 +114,12 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_gps_accuracy"
+                    android:id="@+id/txt_satellite_count"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="4dp"
-                    android:text="精度: 0.00米"
+                    android:text="卫星: 0颗"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -105,22 +131,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txt_satellite_count"
-                    android:layout_width="0dp"
+                    android:id="@+id/txt_locating_mode"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="4dp"
-                    android:text="卫星: 0颗"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/txt_location_mode"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:padding="4dp"
                     android:text="模式: PDR"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center" />
 
             </LinearLayout>
 
@@ -148,6 +166,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_start_stop">
 
         <Button
@@ -187,12 +206,32 @@
         android:id="@+id/btn_start_stop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         android:padding="12dp"
         android:text="开始测量"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- 悬浮按钮 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:layout_constraintBottom_toTopOf="@+id/fab_calibrate"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_calibrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_menu_compass"
+        app:layout_constraintBottom_toTopOf="@+id/mode_switch_container"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

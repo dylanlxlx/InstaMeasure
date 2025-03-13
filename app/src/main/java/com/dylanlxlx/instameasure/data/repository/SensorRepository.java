@@ -19,6 +19,7 @@ public class SensorRepository implements SensorDataManager.SensorDataCallback {
     private final MutableLiveData<float[]> accelerometerData = new MutableLiveData<>(new float[3]);
     private final MutableLiveData<float[]> gyroscopeData = new MutableLiveData<>(new float[3]);
     private final MutableLiveData<float[]> magneticFieldData = new MutableLiveData<>(new float[3]);
+    private final MutableLiveData<Float> stepLength = new MutableLiveData<>(0.7f);
 
     // SensorDataManager 用于处理原始传感器数据
     private final SensorDataManager sensorDataManager;
@@ -64,12 +65,54 @@ public class SensorRepository implements SensorDataManager.SensorDataCallback {
         orientation.postValue(azimuth);
     }
 
+    @Override
+    public void onStepLengthCalculated(float length) {
+        stepLength.postValue(length);
+    }
+
+    /**
+     * 重置传感器处理器
+     */
+    public void resetSensorProcessors() {
+        sensorDataManager.reset();
+        stepCount.postValue(0);
+    }
+
+    /**
+     * 使用GPS方位角校准方向
+     * @param gpsBearing GPS方位角(度)
+     */
+    public void calibrateOrientationWithGps(float gpsBearing) {
+        sensorDataManager.calibrateWithGps(gpsBearing);
+    }
+
+    /**
+     * 设置用户身高
+     * @param height 身高(米)
+     */
+    public void setUserHeight(float height) {
+        sensorDataManager.setUserHeight(height);
+    }
+
+    /**
+     * 校准步长
+     * @param actualDistance 实际距离(米)
+     * @param stepCount 步数
+     */
+    public void calibrateStepLength(float actualDistance, int stepCount) {
+        sensorDataManager.calibrateStepLength(actualDistance, stepCount);
+    }
+
     public LiveData<Integer> getStepCount() {
         return stepCount;
     }
 
     public LiveData<Float> getOrientation() {
         return orientation;
+    }
+
+    public LiveData<Float> getStepLength() {
+        return stepLength;
     }
 
     public LiveData<float[]> getAccelerometerData() {

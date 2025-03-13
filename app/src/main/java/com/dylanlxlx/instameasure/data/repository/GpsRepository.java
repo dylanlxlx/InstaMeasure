@@ -157,4 +157,17 @@ public class GpsRepository {
     public double[] getLastLocation() {
         return new double[]{lastLatitude, lastLongitude};
     }
+
+    /**
+     * 获取最近GPS位置的本地坐标
+     * @return [x, y] 东北坐标(米)
+     */
+    public double[] getLastLocalCoordinates() {
+        List<TrajectoryPoint> points = gpsTrajectoryPoints.getValue();
+        if (points != null && !points.isEmpty()) {
+            TrajectoryPoint last = points.get(points.size() - 1);
+            return new double[]{last.getX(), last.getY()};
+        }
+        return new double[]{0, 0}; // 如果没有GPS点，返回原点
+    }
 }

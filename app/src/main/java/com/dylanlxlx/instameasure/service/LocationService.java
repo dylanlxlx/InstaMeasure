@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -173,6 +174,26 @@ public class LocationService extends Service implements LocationListener, GpsDat
             } catch (SecurityException e) {
                 Log.e(TAG, "Security exception when stopping location tracking", e);
             }
+        }
+    }
+
+    /**
+     * 开始GPS跟踪
+     */
+    public void startGpsTracking() {
+        if (!isTracking) {
+            startTracking(); // 调用现有的startTracking方法
+            Toast.makeText(this, "GPS跟踪已启动", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * 停止GPS跟踪
+     */
+    public void stopGpsTracking() {
+        if (isTracking) {
+            stopTracking(); // 调用现有的stopTracking方法
+            Toast.makeText(this, "GPS跟踪已停止", Toast.LENGTH_SHORT).show();
         }
     }
 
