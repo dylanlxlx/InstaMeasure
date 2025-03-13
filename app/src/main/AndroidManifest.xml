@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -28,8 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaMeasure">
         <activity
-            android:name=".view.activity.ChartActivity"
-            android:exported="true" >
+            android:name=".view.activity.TrajectoryActivity"
+            android:exported="true"
+            android:label="轨迹测量">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,18 +39,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.TempActivity2"
-            android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            android:name=".view.activity.ChartActivity"
+            android:exported="false">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
 
         <!-- 声明服务 -->
         <service
             android:name=".service.SensorService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- 添加位置服务声明 -->
+        <service
+            android:name=".service.LocationService"
             android:enabled="true"
             android:exported="false" />
     </application>

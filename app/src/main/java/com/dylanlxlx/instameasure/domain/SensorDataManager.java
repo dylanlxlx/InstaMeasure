@@ -20,11 +20,13 @@ public class SensorDataManager {
      */
     public interface SensorDataCallback {
         void onStepDetected(int stepCount);
+
         void onOrientationCalculated(float orientation);
     }
 
     /**
      * 构造函数，初始化算法对象和滤波器
+     *
      * @param callback 数据处理回调接口
      */
     public SensorDataManager(SensorDataCallback callback) {
@@ -34,12 +36,9 @@ public class SensorDataManager {
         // 滤波效果过于平滑（响应迟缓）：减小 q 或增大 r
         // 滤波后噪声仍然明显：增大 q 或减小 r
         sensorFilter = new SensorFilter(0.01, 0.1);
-        stepDetector = new StepDetector(new StepDetector.StepCallback() {
-            @Override
-            public void onStepDetected(int stepCount) {
-                if (callback != null) {
-                    callback.onStepDetected(stepCount);
-                }
+        stepDetector = new StepDetector(stepCount -> {
+            if (callback != null) {
+                callback.onStepDetected(stepCount);
             }
         });
         orientationCalculator = new OrientationCalculator();
@@ -47,6 +46,7 @@ public class SensorDataManager {
 
     /**
      * 处理传感器数据
+     *
      * @param sensorData 封装后的传感器数据
      */
     public void processSensorData(SensorData sensorData) {
