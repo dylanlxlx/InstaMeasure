@@ -27,6 +27,7 @@ import com.dylanlxlx.instameasure.view.component.TrajectoryView;
 import com.dylanlxlx.instameasure.viewmodel.MeasureViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.slider.Slider;
+import com.google.ar.core.ArCoreApk;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -55,6 +56,7 @@ public class TrajectoryActivity extends AppCompatActivity {
     private Button btnModeHybrid;
     private FloatingActionButton fabSettings;
     private FloatingActionButton fabCalibrate;
+    private FloatingActionButton fabArMeasure;
     private TrajectoryView trajectoryView;
 
     // 服务相关
@@ -183,6 +185,7 @@ public class TrajectoryActivity extends AppCompatActivity {
         btnModeHybrid = findViewById(R.id.btn_mode_hybrid);
         fabSettings = findViewById(R.id.fab_settings);
         fabCalibrate = findViewById(R.id.fab_calibrate);
+        fabArMeasure = findViewById(R.id.fab_ar_measure);
         trajectoryView = findViewById(R.id.trajectory_view);
 
         // 设置按钮点击事件
@@ -196,6 +199,7 @@ public class TrajectoryActivity extends AppCompatActivity {
         // 设置悬浮按钮点击事件
         fabSettings.setOnClickListener(v -> showSettingsDialog());
         fabCalibrate.setOnClickListener(v -> showCalibrateDialog());
+        fabArMeasure.setOnClickListener(v -> startArMeasurement());
 
         // 更新定位模式UI
         updateLocationModeUI();
@@ -491,6 +495,26 @@ public class TrajectoryActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    /**
+     * 开始AR测量
+     */
+    private void startArMeasurement() {
+        // 检查设备是否支持ARCore
+        boolean isArCoreAvailable = ArCoreApk.getInstance().checkAvailability(this).isSupported();
+
+        if (isArCoreAvailable) {
+            Intent intent = new Intent(this, ArMeasureActivity.class);
+            startActivity(intent);
+        } else {
+            // 如果不支持ARCore，显示提示对话框
+            new AlertDialog.Builder(this)
+                    .setTitle("AR功能不可用")
+                    .setMessage("您的设备不支持AR功能。请使用支持ARCore的设备。")
+                    .setPositiveButton("确定", null)
+                    .show();
+        }
     }
 
     /**

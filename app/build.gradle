@@ -9,6 +9,7 @@ android {
     defaultConfig {
         applicationId "com.dylanlxlx.instameasure"
         minSdk 31
+        //noinspection OldTargetApi
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -39,7 +40,8 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation libs.mpandroidchart
     implementation libs.graphview
-
-    //OpneCV图像处理库
-//    implementation libs.opencv.android
+    implementation libs.core
+    implementation libs.sceneform.ux
+    implementation libs.sceneform.core
+    //OpenCV图像处理库
 }

@@ -8,8 +8,12 @@
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-
-    <!-- 添加权限 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.ar"
+        android:required="false" /> <!-- 添加权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -28,6 +32,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaMeasure">
+
+        <activity
+            android:name=".view.activity.ArMeasureActivity"
+            android:exported="false"
+            android:label="AR测距"
+            android:screenOrientation="fullSensor"
+            tools:ignore="DiscouragedApi">
+            <!--            todo-->
+        </activity>
         <activity
             android:name=".view.activity.TrajectoryActivity"
             android:exported="true"
@@ -41,20 +54,21 @@
         <activity
             android:name=".view.activity.ChartActivity"
             android:exported="false">
-
+            <!--            todo-->
         </activity>
 
         <!-- 声明服务 -->
         <service
             android:name=".service.SensorService"
             android:enabled="true"
-            android:exported="false" />
-
-        <!-- 添加位置服务声明 -->
+            android:exported="false" /> <!-- 添加位置服务声明 -->
         <service
             android:name=".service.LocationService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false" /> <!-- ARCore元数据 -->
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="optional" />
     </application>
 
 </manifest>

@@ -1,27 +1,33 @@
 [versions]
 agp = "8.7.3"
+core = "1.48.0"
+coreVersion = "1.17.1"
 graphview = "4.2.2"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
+kotlinGradlePlugin = "1.6.10"
 material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 mpandroidchart = "v3.1.0"
-opencvAndroid = "4.5.1"
+sceneformUx = "1.17.1"
 
 [libraries]
+core = { module = "com.google.ar:core", version.ref = "core" }
 graphview = { module = "com.jjoe64:graphview", version.ref = "graphview" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
-opencv-android = { module = "org.opencv:opencv-android", version.ref = "opencvAndroid" }
+sceneform-core = { module = "com.google.ar.sceneform:core", version.ref = "coreVersion" }
+sceneform-ux = { module = "com.google.ar.sceneform.ux:sceneform-ux", version.ref = "sceneformUx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
