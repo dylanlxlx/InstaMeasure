@@ -39,7 +39,8 @@
             android:label="AR测距"
             android:screenOrientation="fullSensor"
             tools:ignore="DiscouragedApi">
-            <!--            todo-->
+
+            <!-- todo -->
         </activity>
         <activity
             android:name=".view.activity.TrajectoryActivity"
@@ -54,10 +55,9 @@
         <activity
             android:name=".view.activity.ChartActivity"
             android:exported="false">
-            <!--            todo-->
-        </activity>
 
-        <!-- 声明服务 -->
+            <!-- todo -->
+        </activity> <!-- 声明服务 -->
         <service
             android:name=".service.SensorService"
             android:enabled="true"

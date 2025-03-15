@@ -33,3 +33,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "InstaMeasure"
 include ':app'
+include ':opencv'

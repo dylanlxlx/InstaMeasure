@@ -44,4 +44,5 @@ dependencies {
     implementation libs.sceneform.ux
     implementation libs.sceneform.core
     //OpenCV图像处理库
+    implementation project(':opencv')
 }
